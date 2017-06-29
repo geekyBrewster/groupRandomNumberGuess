@@ -1,0 +1,23 @@
+{
+  "name": "grouprandomnumberguess",
+  "version": "1.0.0",
+  "description": "Team Random Number Guess =",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geekyBrewster/groupRandomNumberGuess.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geekyBrewster/groupRandomNumberGuess/issues"
+  },
+  "homepage": "https://github.com/geekyBrewster/groupRandomNumberGuess#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
+  }
+}
