@@ -23,14 +23,17 @@ function setDifficulty(){
     $('#easy').on('click', function() {
       max = 10;
       $('#maxNumber').text(max);
+      $('#levelSelect').text("Easy selected.");
     });
     $('#medium').on('click', function() {
       max = 25;
       $('#maxNumber').text(max);
+      $('#levelSelect').text("Medium selected.");
     });
     $('#hard').on('click', function() {
       max = 100;
       $('#maxNumber').text(max);
+      $('#levelSelect').text("Hard selected.");
     });
 }
 

@@ -6,24 +6,25 @@
     <script src="vendors/jquery.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
     <link rel="stylesheet" href="views/main.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <h1></h1>
     <div class="difficulty">
-      <button id="easy"type="button" >Easy</button> <br>
-      <button id="medium"type="button" >Medium</button> <br>
-      <button id="hard" type="button" >Hard</button> <br>
-      <br><br>
+      <button class="difficultyButton" id="easy"type="button" >Easy</button><i class="fa fa-star fa-3x" aria-hidden="true"></i> <br>
+      <button class="difficultyButton" id="medium"type="button" >Medium</button><i class="fa fa-star fa-3x" aria-hidden="true"></i><i class="fa fa-star fa-3x" aria-hidden="true"></i> <br>
+      <button class="difficultyButton" id="hard" type="button" >Hard</button><i class="fa fa-star fa-3x" aria-hidden="true"></i><i class="fa fa-star fa-3x" aria-hidden="true"></i><i class="fa fa-star fa-3x" aria-hidden="true"></i> <br>
+      <br><span id="levelSelect"></span><br><br />
       <button id="startGame" type="button" name="button">Start Game</button>
     </div>
     <div class="inputs">
       <div>
         <span>Max Number: </span><span id="maxNumber"></span>&nbsp<span>Total Guesses: </span><span id="totalGuesses"></span><br>
       </div>
-      <span>Player 1</span><input id="player1" type="text"/><span id="p1Guess"></span><br>
-      <span>Player 2</span><input id="player2" type="text"/><span id="p2Guess"></span><br>
-      <span>Player 3</span><input id="player3" type="text"/><span id="p3Guess"></span><br>
-      <span>Player 4</span><input id="player4" type="text"/><span id="p4Guess"></span><br>
+      <span class="playerName">Player 1</span><input id="player1" type="text"/><span id="p1Guess"></span><br>
+      <span class="playerName">Player 2</span><input id="player2" type="text"/><span id="p2Guess"></span><br>
+      <span class="playerName">Player 3</span><input id="player3" type="text"/><span id="p3Guess"></span><br>
+      <span class="playerName">Player 4</span><input id="player4" type="text"/><span id="p4Guess"></span><br>
 
       <button id="submit" type="button" name="button">Submit Guesses</button>
       <button class="restart" type="button" >Start New Game</button>
