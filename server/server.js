@@ -43,9 +43,6 @@ app.post('/submitData', function(req, res){
   }
   console.log("result array: " + returnData);
   res.send(returnData);
-
-
-
 });
 
 app.get("/*", function(req, res){
