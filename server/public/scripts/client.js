@@ -1,20 +1,41 @@
 console.log("js sourced");
 var max = 0;
+var totalGuesses = 0;
 
 $(document).ready(function(){
 
-// Define buttons & their maximum number
-  $('#easy').on('click', function() {
-    max = 10;
-  });
-  $('#medium').on('click', function() {
-    max = 25;
-  });
-  $('#hard').on('click', function() {
-    max = 100;
-  });
+// Set-up Game
+setDifficulty();
+startGame();
 
-//Send max number to the server & hides difficulty button and shows player inputs
+// Game play
+gameLogic();
+
+// Reset game
+resetGame();
+
+});// End of Doc.ready
+
+// FUNCTION DEFINITIONS
+
+function setDifficulty(){
+  // Define buttons & their maximum number
+    $('#easy').on('click', function() {
+      max = 10;
+      $('#maxNumber').text(max);
+    });
+    $('#medium').on('click', function() {
+      max = 25;
+      $('#maxNumber').text(max);
+    });
+    $('#hard').on('click', function() {
+      max = 100;
+      $('#maxNumber').text(max);
+    });
+}
+
+function startGame(){
+  // Onc click, send max number to the server & hides difficulty button and shows player inputs
   $('#startGame').on('click', function() {
     $.ajax({
       type : 'POST',
@@ -26,28 +47,67 @@ $(document).ready(function(){
       }
     });
   });
+}
 
-// Accept 4 player inputs and send to server
-$('#submit').on('click', function(){
-  //Build array of players' guesses
-  var playerGuesses = [];
-  for (var i = 1; i <=4; i++){
-    var player = "#player" + i;       //makes #player1 for use in selector
-    var playerGuess = $(player).val();
-    playerGuesses.push(playerGuess);
-  }
-  console.log(playerGuesses);
-  //send data array to the server
-  $.ajax({
-    type: 'POST',
-    url: '/submitData',
-    data: {playerGuesses: playerGuesses},
-    success: function(response){
-      console.log("Players guesses sent to server.");
-      console.log(response);
+function gameLogic(){
+  // Accept 4 player inputs and send to server
+  $('#submit').on('click', function(){
+    //Build array of players' guesses
+    var playerGuesses = [];
+
+    for (var i = 1; i <=4; i++){
+      var player = "#player" + i;       //makes #player1 for use in selector
+      var playerGuess = $(player).val();
+      playerGuesses.push(playerGuess);
     }
+
+    totalGuesses +=1;
+    $('#totalGuesses').text(totalGuesses);
+    console.log(totalGuesses);
+    console.log(playerGuesses);
+
+    //send data array to the server
+    $.ajax({
+      type: 'POST',
+      url: '/submitData',
+      data: {playerGuesses: playerGuesses},
+      success: function(response){
+        console.log("Players guesses sent to server.");
+        console.log(response);
+
+        //Now appending response array to DOM
+        for(var i = 0; i <= response.length; i++) {
+          var playerSpanID = "#p"+(i + 1) + "Guess";
+          $(playerSpanID).text(response[i]);
+
+          // Look for the winner
+          if(response[i] == "You win"){
+            $('.inputs').hide();
+            $('#winningPlayer').text("Player " + (i + 1));
+            $('#winner').show();
+          }
+        }
+      }
+    });
   });
-});
+}
 
-
-});// End of Doc.ready
+function resetGame(){
+  $('.restart').on('click', function(){
+    // Reset variables
+    max = 0;
+    $('#maxNumber').text(max);
+    totalGuesses = 0;
+    $('#totalGuesses').text(totalGuesses);
+    $('input').val("");
+    for(var i = 1; i <= 4; i++) {
+      var playerSpanID = "#p"+ i + "Guess";
+      $(playerSpanID).text("");
+    }
+    //Hide inputs and show difficulty settings
+    $('.difficulty').show();
+    $('.inputs').hide();
+    $('#winner').hide();
+    }
+  );
+}
