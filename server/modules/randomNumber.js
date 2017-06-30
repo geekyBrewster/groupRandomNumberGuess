@@ -1,5 +1,5 @@
-function randomNumber(min, max) {
-  var rNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+function randomNumber(max) {
+  var rNumber = Math.floor(Math.random() * (max)) + 1;
   return rNumber;
 }
 
